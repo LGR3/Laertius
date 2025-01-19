@@ -6,7 +6,7 @@ import fitz  # PyMuPDF for PDF text extraction
 
 # Input and output directories
 INPUT_DIR = "./input_pdfs"
-OUTPUT_DIR = "./Output_Audios"
+OUTPUT_DIR = "./output_audios"
 
 # Ensure output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
