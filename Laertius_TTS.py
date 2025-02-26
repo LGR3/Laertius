@@ -1,6 +1,7 @@
 # Laertius-TTS - a one-liner text-to-speech v0.02
 
 import os
+## TO DO = CHANGE to human-like voice Lib
 from gtts import gTTS
 import fitz  # PyMuPDF for PDF text extraction
 
