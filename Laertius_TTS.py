@@ -1,8 +1,7 @@
-# Laertius-TTS - a one-liner text-to-speech v0.02
+# Laertius-TTS - a one-liner text-to-speech v0.3
 
 import os
-## TO DO = CHANGE to human-like voice Lib
-from gtts import gTTS
+from TTS.api import TTS  # Using Coqui TTS for a more natural, human-like voice
 import fitz  # PyMuPDF for PDF text extraction
 
 # Input and output directories
@@ -26,10 +25,10 @@ def extract_text_from_pdf(pdf_path):
         return ""
 
 def convert_text_to_audio(text, output_path):
-    """Converts text to audio using gTTS and saves it."""
+    """Converts text to audio using Coqui TTS and saves it."""
     try:
-        tts = gTTS(text=text, lang='pt-br')
-        tts.save(output_path)
+        tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False)
+        tts.tts_to_file(text=text, file_path=output_path)
         print(f"Audio saved: {output_path}")
     except Exception as e:
         print(f"Error converting text to audio: {e}")
@@ -39,7 +38,8 @@ def process_pdfs(input_dir, output_dir):
     for filename in os.listdir(input_dir):
         if filename.lower().endswith(".pdf"):
             pdf_path = os.path.join(input_dir, filename)
-            audio_path = os.path.join(output_dir, os.path.splitext(filename)[0] + ".mp3")
+            # Change extension to .wav since Coqui TTS outputs WAV files
+            audio_path = os.path.join(output_dir, os.path.splitext(filename)[0] + ".wav")
 
             print(f"Processing: {filename}")
             text = extract_text_from_pdf(pdf_path)
