@@ -8,7 +8,8 @@ import fitz  # PyMuPDF for PDF text extraction
 INPUT_DIR = "./input_pdfs"
 OUTPUT_DIR = "./output_audios"
 
-# Ensure output directory exists
+# Ensure directories exist
+os.makedirs(INPUT_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def extract_text_from_pdf(pdf_path):
